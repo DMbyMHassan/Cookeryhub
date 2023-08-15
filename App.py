@@ -42,10 +42,20 @@ def uplod_form():
             }
             df_recipes.append(new_recipe,ignore_index =True)
             df_recipes.to_csv(csv_file,index=False)
-        return
-    else:
-        return
+            return redirect(url_for('recipes'))
+        else:
+            return"please fill all the required and upload an image"
+    return render_template('upload_from.html')
 
+
+@app.route('/remove/<int:index>',methods=['GET','POST'])
+def remove_recipe(index):
+    if request.method =='POST':
+        """Remove the recipe with given index from DateFrame"""
+        def_recipes.drop(index,inplace=True)
+        def_recipes.to_csv(index=False)
+        return redirect(url_for('recipes'))
+    return render_template('remove_recipes.html', recipe=df_recipes.loc[index].to_dict())
 
 if __name__ == '__main__':
     app.run(debug=True)
