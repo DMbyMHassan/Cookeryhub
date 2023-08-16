@@ -2,9 +2,26 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>{%block title%}{%endblock%}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    <header>
+        <h1>CookaryHub Web App</h1>
+        <nav>
+            <ul>
+                <li><a href="{{url_for('homepage')}}">Home</a></li>
+                <li><a href="{{url_for('recipes')}}">Home</a></li>
+                <li><a href="{{url_for('upload_form')}}">Home</a></li>
+            </ul>
+        </nav>
+   </header>
+    <main>
+        {%block content%}{%enblock%}
+    </main>
+    <footer>
+         <p>&copy;{{current_year}}CookaryHub Web App </p>
+    </footer>
 
 </body>
 </html>
