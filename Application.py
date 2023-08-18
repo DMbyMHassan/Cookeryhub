@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import pandas as pd
 import os
 
@@ -46,7 +46,9 @@ def upload_form():
                 'Serving_Instructions': serving_instructions,
                 'Image_URL': f'images/{image.filename}'
             }
-            df_recipes = df_recipes.append(new_recipe, ignore_index=True)
+            new_recipe_df = pd.DataFrame([new_recipe])
+            df_recipes =pd.concat([df_recipes,new_recipe_df],ignore_index=True)
+
             df_recipes.to_csv(csv_file, index=False)
 
             return redirect(url_for('recipes'))
