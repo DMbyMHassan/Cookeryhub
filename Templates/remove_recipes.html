@@ -1,10 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}Remove Recipe{% endblock %}
+
+{% block content %}
+    <h2>Remove Recipe</h2>
+    <p>Choose a recipe to remove:</p>
+    {% for recipe in recipes %}
+    <div class="recipe-item">
+        <img src="{{ url_for('static', filename=recipe.Image_URL) }}" alt="{{ recipe.Recipe_Name }}">
+        <h3>{{ recipe.Recipe_Name }}</h3>
+        <ul>
+            <li><strong>Ingredients:</strong> {{ recipe.Ingredients }}</li>
+            <li><strong>Preparation Instructions:</strong> {{ recipe.Preparation_Instructions }}</li>
+            <li><strong>Serving Instructions:</strong> {{ recipe.Serving_Instructions }}</li>
+        </ul>
+        <form action="{{ url_for('remove_recipe', index=loop.index0) }}" method="post">
+            <input type="submit" value="Confirm Removal">
+        </form>
+    </div>
+    {% endfor %}
+{% endblock %}

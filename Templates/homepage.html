@@ -3,9 +3,11 @@
 {% block title%} Homepage{%endblock%}
 
 {%block content%}
-    <h2>Welcome to CookaryHub Web App</h2>
-    <p>This Web app allowsyou to explore a verity of delicious recipes</p>
-    <p>Get a tour by checking out the<a href="{{ url_for('recipes') }}">Recipes</a> page or upload your own recipe <a href="{{ url_for('upload_form') }}">here</a>.</p>
+    <h2>Welcome to our CookeryHUB  Web App</h2>
+    <p>This web app allows you to explore a variety of delicious cooking recipes.</p>
+    <p>Get started by checking out the  <a href="{{ url_for('recipes') }}">Recipes</a> page or upload your own recipe <a href="{{ url_for('upload_form') }}"> here </a>.</p>
+    <p>Want to remove a Recipe? Visit the  <a href="{{ url_for('remove_recipe',index=0) }}">Remove Recipes</a> page.</p>
+    <p>Search for a Recipe <a  href="{{ url_for('search') }}"><i class="fas fa-search"></i></a></p>
 {% endblock %}
 
 

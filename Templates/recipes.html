@@ -2,16 +2,16 @@
 
 {% block title %}Recipes{% endblock %}
 
-{% block content %}
-    <h2>Recipes</h2>
-    <div class ="recipe -item">
-        <img src="{{ url_for('static', filename='images/image1.jpg') }}" alt="Image 1" class="recipe-image">
-        <h3>Recipe 1</h3>
+{% block content %}    <h2>Recipes</h2>
+    {% for recipe in recipes %}
+    <div class="recipe-item">
+        <img src="{{ url_for('static', filename=recipe.Image_URL) }}" alt="{{ recipe.Recipe_Name }}" class="recipe-image">
+        <h3>{{ recipe.Recipe_Name }}</h3>
         <ul>
-            <li><strong></strong></li>
-            <li><strong></strong></li>
-            <li><strong></strong></li>
+            <li><strong>Ingredients:</strong> {{ recipe.Ingredients }}</li>
+            <li><strong>Preparation Instructions:</strong> {{ recipe.Preparation_Instructions }}</li>
+            <li><strong>Serving Instructions:</strong> {{ recipe.Serving_Instructions }}</li>
         </ul>
+    </div>
+    {% endfor %}
 {% endblock %}
-
-

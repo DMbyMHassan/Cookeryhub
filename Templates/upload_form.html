@@ -1,10 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block title %}Upload Recipe{% endblock %}
+
+{% block content %}
+    <h2>Upload New Recipe</h2>
+    <form action="{{ url_for('upload_form') }}" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <legend>Recipe Information</legend>
+            <label for="recipe_name">Recipe Name:</label>
+            <input type="text" name="recipe_name" required>
+            <br>
+
+            <label for="ingredients">Ingredients:</label>
+            <textarea name="ingredients" required></textarea>
+            <br>
+
+            <label for="preparation_instructions">Preparation Instructions:</label>
+            <textarea name="preparation_instructions" required></textarea>
+            <br>
+
+            <label for="serving_instructions">Serving Instructions:</label>
+            <input type="text" name="serving_instructions" required>
+        </fieldset>
+
+        <fieldset>
+            <legend>Recipe Image</legend>
+            <label for="image">Image:</label>
+            <input type="file" name="image" accept=".jpg, .jpeg, .png" required>
+        </fieldset>
+
+        <br>
+        <input type="submit" value="Upload">
+    </form>
+
+{% endblock %}
