@@ -25,23 +25,25 @@ def recipes():
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_form():
-    global df_recipes
-  #Declar def_recipes as aglobal variable
+    global df_recipes  # Declare df_recipes as global to modify the global variable within the function
+
     if request.method == 'POST':
         recipe_name = request.form['recipe_name']
         ingredients = request.form['ingredients']
-        preparation_instructions = request.form['preperation_instructions']
-        serving_instructions = request.form['serving_instrucyios']
+        preparation_instructions = request.form['preparation_instructions']
+        serving_instructions = request.form['serving_instructions']
         image = request.files['image']
-        #Validation the form data and process the image upload
+
+        # Validate the form data and process the image upload
         if recipe_name and ingredients and preparation_instructions and serving_instructions and image:
-            image.save(os.path.join(app.config['UPLOAD_FOLDER'],image.filename))
-            #Append new recipe to the DataFrame and save it back to the CSV
+            image.save(os.path.join(app.config['UPLOAD_FOLDER'], image.filename))
+
+            # Append new recipe to the DataFrame and save it back to the CSV
             new_recipe = {
                 'Recipe_Name': recipe_name,
                 'Ingredients': ingredients,
                 'Preparation_Instructions': preparation_instructions,
-                'Serving_Instructions' :serving_instructions,
+                'Serving_Instructions': serving_instructions,
                 'Image_URL': f'images/{image.filename}'
             }
             df_recipes = df_recipes.append(new_recipe, ignore_index=True)
@@ -49,8 +51,9 @@ def upload_form():
 
             return redirect(url_for('recipes'))
         else:
-            return"please fill all the required and upload an image"
-    return render_template('upload_from.html')
+            return "Please fill all the required fields and upload an image."
+
+    return render_template('upload_form.html')
 
 
 @app.route('/remove/<int:index>',methods=['GET','POST'])
